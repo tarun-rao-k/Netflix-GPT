@@ -1,0 +1,25 @@
+{
+  "name": "netflix-gpt",
+  "version": "1.0.0",
+  "description": "this is a netflix gpt application",
+  "scripts": {
+    "test": "jest",
+    "start": " parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Tarun Rao K",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.14.4",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
+    "firebase": "^11.6.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.11.2"
+  }
+}
