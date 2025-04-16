@@ -1,12 +1,12 @@
 import React from 'react'
-import BrowseHeader from './BrowseHeader'
+import LoginHeader from './LoginHeader.js'
 
 const Browse = () => {
   return (
     <div>
-      <BrowseHeader/>
+      <LoginHeader/>
     </div>
   )
 }
 
-export default Browse
+export default Browse;

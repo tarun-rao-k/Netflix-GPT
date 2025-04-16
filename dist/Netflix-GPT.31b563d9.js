@@ -21447,8 +21447,8 @@ var _auth = require("firebase/auth");
 var _firebaseJs = require("../Utilities/firebase.js");
 var _reactRedux = require("react-redux");
 var _userSliceJs = require("../Utilities/userSlice.js");
-var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
+// import { useNavigate } from 'react-router-dom';
 const Login = ()=>{
     _s();
     const [validationErrMsg, setValidationErrMsg] = (0, _react.useState)(null);
@@ -21457,7 +21457,7 @@ const Login = ()=>{
     const password = (0, _react.useRef)();
     const name = (0, _react.useRef)();
     const dispatch = (0, _reactRedux.useDispatch)();
-    const navigate = (0, _reactRouterDom.useNavigate)();
+    // const navigate = useNavigate();
     const validateInputs = ()=>{
         const validationErrMsg = (0, _loginValidationJs.loginValidation)(email.current.value, password.current.value);
         setValidationErrMsg(validationErrMsg);
@@ -21475,7 +21475,7 @@ const Login = ()=>{
                         email: email,
                         displayName: displayName
                     }));
-                    navigate("/browse");
+                // navigate("/browse");
                 }).catch((error)=>{
                 // An error occurred
                 // ...
@@ -21494,7 +21494,7 @@ const Login = ()=>{
                     email: user.email,
                     displayName: user.displayName
                 }));
-                navigate("/browse");
+            // navigate("/browse");
             // ...
             }).catch((error)=>{
                 const errorCode = error.code;
@@ -21621,10 +21621,9 @@ const Login = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(Login, "ZPo53uCSuk4nsJEfwNGXuphaTI0=", false, function() {
+_s(Login, "reNY8ErRb6U6/LB5AQT0vq4HUzI=", false, function() {
     return [
-        (0, _reactRedux.useDispatch),
-        (0, _reactRouterDom.useNavigate)
+        (0, _reactRedux.useDispatch)
     ];
 });
 _c = Login;
@@ -21637,7 +21636,7 @@ $RefreshReg$(_c, "Login");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./LoginHeader.js":"8LSTd","../Utilities/loginValidation.js":"9GMpc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase.js":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN","react-router-dom":"61z4w"}],"8LSTd":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./LoginHeader.js":"8LSTd","../Utilities/loginValidation.js":"9GMpc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase.js":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN"}],"8LSTd":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$14eb = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$14eb.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -21650,23 +21649,94 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _auth = require("firebase/auth");
+var _firebase = require("../Utilities/firebase");
+var _reactRedux = require("react-redux");
+var _userSliceJs = require("../Utilities/userSlice.js");
+var _reactRouterDom = require("react-router-dom");
+var _s = $RefreshSig$();
 const LoginHeader = ()=>{
+    _s();
+    const dispatch = (0, _reactRedux.useDispatch)();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const user = (0, _firebase.auth).currentUser;
+    (0, _react.useEffect)(()=>{
+        (0, _auth.onAuthStateChanged)((0, _firebase.auth), (user)=>{
+            if (user) // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            // const uid = user.uid;
+            // ...
+            navigate('/browse');
+            else // User is signed out
+            // ...
+            navigate('/');
+        });
+    }, []);
+    const handleSignOut = ()=>{
+        (0, _auth.signOut)((0, _firebase.auth)).then(()=>{
+            dispatch((0, _userSliceJs.removeUser)());
+        // navigate("/");
+        }).catch((error)=>{
+        // An error happened.
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "bg-gradient-to-b from-black to-transparent absolute w-full",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-            src: "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
-            className: "  h-28 ml-8 "
-        }, void 0, false, {
-            fileName: "src/Components/LoginHeader.js",
-            lineNumber: 6,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
+        className: "bg-gradient-to-b from-black to-transparent absolute w-full flex items-center justify-between",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
+                    className: "  h-28 ml-8 "
+                }, void 0, false, {
+                    fileName: "src/Components/LoginHeader.js",
+                    lineNumber: 46,
+                    columnNumber: 7
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/Components/LoginHeader.js",
+                lineNumber: 45,
+                columnNumber: 7
+            }, undefined),
+            user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "flex items-center",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                        src: "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
+                        alt: "User icon",
+                        className: "h-14"
+                    }, void 0, false, {
+                        fileName: "src/Components/LoginHeader.js",
+                        lineNumber: 49,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "bg-red-700 text-white mx-2 h-7 px-2 rounded-md",
+                        onClick: handleSignOut,
+                        children: "Sign Out"
+                    }, void 0, false, {
+                        fileName: "src/Components/LoginHeader.js",
+                        lineNumber: 50,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/Components/LoginHeader.js",
+                lineNumber: 48,
+                columnNumber: 14
+            }, undefined)
+        ]
+    }, void 0, true, {
         fileName: "src/Components/LoginHeader.js",
-        lineNumber: 5,
+        lineNumber: 44,
         columnNumber: 5
     }, undefined);
 };
+_s(LoginHeader, "s5YDugppCHA/sTog5Ue+JVWibms=", false, function() {
+    return [
+        (0, _reactRedux.useDispatch),
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
 _c = LoginHeader;
 exports.default = LoginHeader;
 var _c;
@@ -21677,7 +21747,7 @@ $RefreshReg$(_c, "LoginHeader");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"7h6Pi":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN","react-router-dom":"61z4w"}],"7h6Pi":[function(require,module,exports,__globalThis) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -23954,18 +24024,6 @@ function $da9882e673ac146b$var$ErrorOverlay() {
     });
     return null;
 }
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9GMpc":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "loginValidation", ()=>loginValidation);
-const loginValidation = (emailId, password)=>{
-    const isEmailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailId);
-    const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
-    if (!isEmailValid) return "Email Id not valid";
-    if (!isPasswordValid) return "Password not valid";
-    return null;
-};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4ZBbi":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -45140,6 +45198,18 @@ function createThunkMiddleware(extraArgument) {
 var thunk = createThunkMiddleware();
 var withExtraArgument = createThunkMiddleware;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9GMpc":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loginValidation", ()=>loginValidation);
+const loginValidation = (emailId, password)=>{
+    const isEmailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailId);
+    const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
+    if (!isEmailValid) return "Email Id not valid";
+    if (!isPasswordValid) return "Password not valid";
+    return null;
+};
+
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"8UZJ4":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$01a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$01a4.init();
@@ -45153,11 +45223,11 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _browseHeader = require("./BrowseHeader");
-var _browseHeaderDefault = parcelHelpers.interopDefault(_browseHeader);
+var _loginHeaderJs = require("./LoginHeader.js");
+var _loginHeaderJsDefault = parcelHelpers.interopDefault(_loginHeaderJs);
 const Browse = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _browseHeaderDefault.default), {}, void 0, false, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginHeaderJsDefault.default), {}, void 0, false, {
             fileName: "src/Components/Browse.js",
             lineNumber: 7,
             columnNumber: 7
@@ -45178,106 +45248,7 @@ $RefreshReg$(_c, "Browse");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./BrowseHeader":"k4QEw"}],"k4QEw":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$4d21 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-$parcel$ReactRefreshHelpers$4d21.init();
-var prevRefreshReg = globalThis.$RefreshReg$;
-var prevRefreshSig = globalThis.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4d21.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _auth = require("firebase/auth");
-var _firebase = require("../Utilities/firebase");
-var _reactRedux = require("react-redux");
-var _userSliceJs = require("../Utilities/userSlice.js");
-var _reactRouterDom = require("react-router-dom");
-var _s = $RefreshSig$();
-const BrowseHeader = ()=>{
-    _s();
-    const dispatch = (0, _reactRedux.useDispatch)();
-    const navigate = (0, _reactRouterDom.useNavigate)();
-    const handleSignOut = ()=>{
-        (0, _auth.signOut)((0, _firebase.auth)).then(()=>{
-            dispatch((0, _userSliceJs.removeUser)());
-            navigate("/");
-        }).catch((error)=>{
-        // An error happened.
-        });
-    };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "bg-black flex items-center justify-between",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
-                    alt: "Netflix icon",
-                    className: "h-20"
-                }, void 0, false, {
-                    fileName: "src/Components/BrowseHeader.js",
-                    lineNumber: 25,
-                    columnNumber: 9
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/Components/BrowseHeader.js",
-                lineNumber: 24,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "flex items-center",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                        src: "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
-                        alt: "User icon",
-                        className: "h-14"
-                    }, void 0, false, {
-                        fileName: "src/Components/BrowseHeader.js",
-                        lineNumber: 29,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "bg-red-700 text-white mx-2 h-7 px-2 rounded-md",
-                        onClick: handleSignOut,
-                        children: "Sign Out"
-                    }, void 0, false, {
-                        fileName: "src/Components/BrowseHeader.js",
-                        lineNumber: 30,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/Components/BrowseHeader.js",
-                lineNumber: 28,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/Components/BrowseHeader.js",
-        lineNumber: 23,
-        columnNumber: 5
-    }, undefined);
-};
-_s(BrowseHeader, "R1L93MxeLXzQXESpmjjjQSuQgvM=", false, function() {
-    return [
-        (0, _reactRedux.useDispatch),
-        (0, _reactRouterDom.useNavigate)
-    ];
-});
-_c = BrowseHeader;
-exports.default = BrowseHeader;
-var _c;
-$RefreshReg$(_c, "BrowseHeader");
-
-  $parcel$ReactRefreshHelpers$4d21.postlude(module);
-} finally {
-  globalThis.$RefreshReg$ = prevRefreshReg;
-  globalThis.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN","react-router-dom":"61z4w"}],"iWcwL":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./LoginHeader.js":"8LSTd"}],"iWcwL":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _toolkit = require("@reduxjs/toolkit");
