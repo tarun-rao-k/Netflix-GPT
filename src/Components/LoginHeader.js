@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { signOut } from "firebase/auth";
 import { auth } from '../Utilities/firebase';
 import { useDispatch } from 'react-redux';
-import {removeUser} from '../Utilities/userSlice.js';
+import {addUser, removeUser} from '../Utilities/userSlice.js';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -18,6 +18,8 @@ const LoginHeader = () => {
           // https://firebase.google.com/docs/reference/js/auth.user
           // const uid = user.uid;
           // ...
+          const {uid,email,displayName}= user;
+          dispatch(addUser({uid:uid,email:email,displayName:displayName}));
           navigate('/browse');
         } else {
           // User is signed out
