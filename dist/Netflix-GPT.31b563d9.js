@@ -21654,12 +21654,25 @@ var _firebase = require("../Utilities/firebase");
 var _reactRedux = require("react-redux");
 var _userSliceJs = require("../Utilities/userSlice.js");
 var _reactRouterDom = require("react-router-dom");
+var _gptSliceJs = require("../Utilities/gptSlice.js");
+var _languageOptionsJs = require("../Utilities/languageOptions.js");
+var _languageOptionsJsDefault = parcelHelpers.interopDefault(_languageOptionsJs);
+var _userPreferancesJs = require("../Utilities/userPreferances.js");
 var _s = $RefreshSig$();
 const LoginHeader = ()=>{
     _s();
     const dispatch = (0, _reactRedux.useDispatch)();
     const navigate = (0, _reactRouterDom.useNavigate)();
     const user = (0, _firebase.auth).currentUser;
+    const selector = (0, _reactRedux.useSelector)((store)=>{
+        return store.gpt.showGptSearchPage;
+    });
+    const handleGptPage = ()=>{
+        dispatch((0, _gptSliceJs.setShowGptSearchPage)());
+    };
+    const languageChanged = (e)=>{
+        dispatch((0, _userPreferancesJs.changeLanguage)(e));
+    };
     (0, _react.useEffect)(()=>{
         (0, _auth.onAuthStateChanged)((0, _firebase.auth), (user)=>{
             if (user) {
@@ -21696,24 +21709,50 @@ const LoginHeader = ()=>{
                     className: "  h-28 ml-8 "
                 }, void 0, false, {
                     fileName: "src/Components/LoginHeader.js",
-                    lineNumber: 48,
+                    lineNumber: 60,
                     columnNumber: 7
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/Components/LoginHeader.js",
-                lineNumber: 47,
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined),
             user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "flex items-center",
                 children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                        onChange: (e)=>languageChanged(e.target.value),
+                        children: (0, _languageOptionsJsDefault.default).map((languageOption)=>{
+                            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                value: languageOption.value,
+                                children: languageOption.language
+                            }, languageOption.value, false, {
+                                fileName: "src/Components/LoginHeader.js",
+                                lineNumber: 65,
+                                columnNumber: 22
+                            }, undefined);
+                        })
+                    }, void 0, false, {
+                        fileName: "src/Components/LoginHeader.js",
+                        lineNumber: 63,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "bg-orange-500 text-white px-2 py-1 mr-4 rounded-lg",
+                        onClick: handleGptPage,
+                        children: selector ? "Home page" : "GPT Search"
+                    }, void 0, false, {
+                        fileName: "src/Components/LoginHeader.js",
+                        lineNumber: 69,
+                        columnNumber: 9
+                    }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                         src: "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
                         alt: "User icon",
                         className: "h-14"
                     }, void 0, false, {
                         fileName: "src/Components/LoginHeader.js",
-                        lineNumber: 51,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -21722,26 +21761,27 @@ const LoginHeader = ()=>{
                         children: "Sign Out"
                     }, void 0, false, {
                         fileName: "src/Components/LoginHeader.js",
-                        lineNumber: 52,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/Components/LoginHeader.js",
-                lineNumber: 50,
+                lineNumber: 62,
                 columnNumber: 14
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/Components/LoginHeader.js",
-        lineNumber: 46,
+        lineNumber: 58,
         columnNumber: 5
     }, undefined);
 };
-_s(LoginHeader, "s5YDugppCHA/sTog5Ue+JVWibms=", false, function() {
+_s(LoginHeader, "B3mFITN04bkyyNCitxOwqg0NL/c=", false, function() {
     return [
         (0, _reactRedux.useDispatch),
-        (0, _reactRouterDom.useNavigate)
+        (0, _reactRouterDom.useNavigate),
+        (0, _reactRedux.useSelector)
     ];
 });
 _c = LoginHeader;
@@ -21754,7 +21794,7 @@ $RefreshReg$(_c, "LoginHeader");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN","react-router-dom":"61z4w"}],"7h6Pi":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","firebase/auth":"4ZBbi","../Utilities/firebase":"ezIUW","react-redux":"hbNxT","../Utilities/userSlice.js":"0MutN","react-router-dom":"61z4w","../Utilities/gptSlice.js":"jBy3J","../Utilities/languageOptions.js":"bTAKQ","../Utilities/userPreferances.js":"cmH4X"}],"7h6Pi":[function(require,module,exports,__globalThis) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -45205,7 +45245,65 @@ function createThunkMiddleware(extraArgument) {
 var thunk = createThunkMiddleware();
 var withExtraArgument = createThunkMiddleware;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9GMpc":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jBy3J":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setShowGptSearchPage", ()=>setShowGptSearchPage);
+var _toolkit = require("@reduxjs/toolkit");
+const gptSlice = (0, _toolkit.createSlice)({
+    name: "gpt",
+    initialState: {
+        showGptSearchPage: false
+    },
+    reducers: {
+        setShowGptSearchPage (state, action) {
+            state.showGptSearchPage = !state.showGptSearchPage;
+            console.log(state.showGptSearchPage);
+        }
+    }
+});
+exports.default = gptSlice.reducer;
+const { setShowGptSearchPage } = gptSlice.actions;
+
+},{"@reduxjs/toolkit":"fKS5f","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"bTAKQ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const languageOptions = [
+    {
+        language: "English",
+        value: "en"
+    },
+    {
+        language: "Kannada",
+        value: "ka"
+    },
+    {
+        language: "Hindi",
+        value: "hi"
+    }
+];
+exports.default = languageOptions;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"cmH4X":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "changeLanguage", ()=>changeLanguage);
+var _toolkit = require("@reduxjs/toolkit");
+const userPreferences = (0, _toolkit.createSlice)({
+    name: "preferences",
+    initialState: {
+        lang: "en"
+    },
+    reducers: {
+        changeLanguage (state, action) {
+            state.lang = action.payload;
+        }
+    }
+});
+exports.default = userPreferences.reducer;
+const { changeLanguage } = userPreferences.actions;
+
+},{"@reduxjs/toolkit":"fKS5f","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"9GMpc":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "loginValidation", ()=>loginValidation);
@@ -45236,32 +45334,53 @@ var _mainContainerJs = require("./MainContainer.js");
 var _mainContainerJsDefault = parcelHelpers.interopDefault(_mainContainerJs);
 var _secondaryContainerJs = require("./SecondaryContainer.js");
 var _secondaryContainerJsDefault = parcelHelpers.interopDefault(_secondaryContainerJs);
+var _reactRedux = require("react-redux");
+var _gptPageJs = require("./GptPage.js");
+var _gptPageJsDefault = parcelHelpers.interopDefault(_gptPageJs);
+var _s = $RefreshSig$();
 const Browse = ()=>{
+    _s();
+    const selector = (0, _reactRedux.useSelector)((store)=>{
+        return store.gpt?.showGptSearchPage;
+    });
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginHeaderJsDefault.default), {}, void 0, false, {
                 fileName: "src/Components/Browse.js",
-                lineNumber: 9,
+                lineNumber: 13,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainContainerJsDefault.default), {}, void 0, false, {
+            selector ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gptPageJsDefault.default), {}, void 0, false, {
                 fileName: "src/Components/Browse.js",
-                lineNumber: 10,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _secondaryContainerJsDefault.default), {}, void 0, false, {
-                fileName: "src/Components/Browse.js",
-                lineNumber: 11,
-                columnNumber: 7
-            }, undefined)
+                lineNumber: 14,
+                columnNumber: 17
+            }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainContainerJsDefault.default), {}, void 0, false, {
+                        fileName: "src/Components/Browse.js",
+                        lineNumber: 16,
+                        columnNumber: 10
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _secondaryContainerJsDefault.default), {}, void 0, false, {
+                        fileName: "src/Components/Browse.js",
+                        lineNumber: 17,
+                        columnNumber: 10
+                    }, undefined)
+                ]
+            }, void 0, true)
         ]
     }, void 0, true, {
         fileName: "src/Components/Browse.js",
-        lineNumber: 8,
+        lineNumber: 12,
         columnNumber: 5
     }, undefined);
 };
+_s(Browse, "agytgViX0Myi+MHshvgW7nSJ69E=", false, function() {
+    return [
+        (0, _reactRedux.useSelector)
+    ];
+});
 _c = Browse;
 exports.default = Browse;
 var _c;
@@ -45272,7 +45391,7 @@ $RefreshReg$(_c, "Browse");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./LoginHeader.js":"8LSTd","./MainContainer.js":"5p7Jt","./SecondaryContainer.js":"fsbNt"}],"5p7Jt":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./LoginHeader.js":"8LSTd","./MainContainer.js":"5p7Jt","./SecondaryContainer.js":"fsbNt","react-redux":"hbNxT","./GptPage.js":"1O7Q4"}],"5p7Jt":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$5eae = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$5eae.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -45659,7 +45778,7 @@ const SecondaryContainer = ()=>{
         return store.movie?.upcomingMovie;
     });
     console.log(nowWatching);
-    if (nowWatching != null) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "bg-black ",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCategoryDefault.default), {
@@ -45943,7 +46062,145 @@ exports.default = useUpcomingMovie;
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"jMk1U","../Utilities/constants.js":"bTAhy","react-redux":"hbNxT","../Utilities/movieSlice.js":"e6b7t","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"iWcwL":[function(require,module,exports,__globalThis) {
+},{"react":"jMk1U","../Utilities/constants.js":"bTAhy","react-redux":"hbNxT","../Utilities/movieSlice.js":"e6b7t","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"1O7Q4":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$a714 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$a714.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a714.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _gptSearchBox = require("./GptSearchBox");
+var _gptSearchBoxDefault = parcelHelpers.interopDefault(_gptSearchBox);
+function GptPage() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gptSearchBoxDefault.default), {}, void 0, false, {
+                fileName: "src/Components/GptPage.js",
+                lineNumber: 7,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                src: "https://assets.nflxext.com/ffe/siteui/vlv3/fa4630b1-ca1e-4788-94a9-eccef9f7af86/web/IN-en-20250407-TRIFECTA-perspective_43f6a235-9f3d-47ef-87e0-46185ab6a7e0_large.jpg",
+                alt: "background-image "
+            }, void 0, false, {
+                fileName: "src/Components/GptPage.js",
+                lineNumber: 8,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/Components/GptPage.js",
+        lineNumber: 6,
+        columnNumber: 5
+    }, this);
+}
+_c = GptPage;
+exports.default = GptPage;
+GptPage;
+var _c;
+$RefreshReg$(_c, "GptPage");
+
+  $parcel$ReactRefreshHelpers$a714.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./GptSearchBox":"7ILDD"}],"7ILDD":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$e1ad = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$e1ad.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$e1ad.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _languages = require("../Utilities/languages");
+var _languagesDefault = parcelHelpers.interopDefault(_languages);
+var _reactRedux = require("react-redux");
+var _s = $RefreshSig$();
+const GptSearchBox = ()=>{
+    _s();
+    const preferedLanguage = (0, _reactRedux.useSelector)((store)=>{
+        return store.preferences.lang;
+    });
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "absolute bg-black left-1/2  -translate-x-1/2 mt-[12%] pl-4 pt-4 pb-4 rounded-lg w-1/2",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+            className: "",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                    placeholder: (0, _languagesDefault.default)[preferedLanguage].searchPlaceholder,
+                    className: "py-2 px-2 rounded-lg w-3/4"
+                }, void 0, false, {
+                    fileName: "src/Components/GptSearchBox.js",
+                    lineNumber: 10,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                    className: "bg-red-700 text-white p-2 rounded-lg ml-2 w-32",
+                    children: (0, _languagesDefault.default)[preferedLanguage].searchBtn
+                }, void 0, false, {
+                    fileName: "src/Components/GptSearchBox.js",
+                    lineNumber: 11,
+                    columnNumber: 9
+                }, undefined)
+            ]
+        }, void 0, true, {
+            fileName: "src/Components/GptSearchBox.js",
+            lineNumber: 9,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/Components/GptSearchBox.js",
+        lineNumber: 8,
+        columnNumber: 5
+    }, undefined);
+};
+_s(GptSearchBox, "PrVrdMtsaU0R89x537FeW3r4X5I=", false, function() {
+    return [
+        (0, _reactRedux.useSelector)
+    ];
+});
+_c = GptSearchBox;
+exports.default = GptSearchBox;
+var _c;
+$RefreshReg$(_c, "GptSearchBox");
+
+  $parcel$ReactRefreshHelpers$e1ad.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../Utilities/languages":"eugey","react-redux":"hbNxT"}],"eugey":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const languages = {
+    en: {
+        searchBtn: "search",
+        searchPlaceholder: "TypeIn and I will recommend you a movie"
+    },
+    ka: {
+        searchBtn: "\u0CB9\u0CC1\u0CA1\u0CC1\u0C95\u0CC1",
+        searchPlaceholder: "\u0C9F\u0CC8\u0CAA\u0CCD\u0C87\u0CA8\u0CCD \u0CAE\u0CA4\u0CCD\u0CA4\u0CC1 \u0CA8\u0CBE\u0CA8\u0CC1 \u0CA8\u0CBF\u0CAE\u0C97\u0CC6 \u0C9A\u0CB2\u0CA8\u0C9A\u0CBF\u0CA4\u0CCD\u0CB0\u0CB5\u0CA8\u0CCD\u0CA8\u0CC1 \u0CB6\u0CBF\u0CAB\u0CBE\u0CB0\u0CB8\u0CC1 \u0CAE\u0CBE\u0CA1\u0CC1\u0CA4\u0CCD\u0CA4\u0CC7\u0CA8\u0CC6"
+    },
+    hi: {
+        searchBtn: "\u0916\u094B\u091C",
+        searchPlaceholder: "\u091F\u093E\u0907\u092A \u0915\u0930\u0947\u0902 \u0914\u0930 \u092E\u0948\u0902 \u0906\u092A\u0915\u094B \u090F\u0915 \u092B\u093F\u0932\u094D\u092E \u0915\u0940 \u0905\u0928\u0941\u0936\u0902\u0938\u093E \u0915\u0930\u0942\u0902\u0917\u093E"
+    }
+};
+exports.default = languages;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iWcwL":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _toolkit = require("@reduxjs/toolkit");
@@ -45951,14 +46208,20 @@ var _userSliceJs = require("./userSlice.js");
 var _userSliceJsDefault = parcelHelpers.interopDefault(_userSliceJs);
 var _movieSliceJs = require("./movieSlice.js");
 var _movieSliceJsDefault = parcelHelpers.interopDefault(_movieSliceJs);
+var _gptSliceJs = require("./gptSlice.js");
+var _gptSliceJsDefault = parcelHelpers.interopDefault(_gptSliceJs);
+var _userPreferancesJs = require("./userPreferances.js");
+var _userPreferancesJsDefault = parcelHelpers.interopDefault(_userPreferancesJs);
 const appStore = (0, _toolkit.configureStore)({
     reducer: {
         user: (0, _userSliceJsDefault.default),
-        movie: (0, _movieSliceJsDefault.default)
+        movie: (0, _movieSliceJsDefault.default),
+        gpt: (0, _gptSliceJsDefault.default),
+        preferences: (0, _userPreferancesJsDefault.default)
     }
 });
 exports.default = appStore;
 
-},{"@reduxjs/toolkit":"fKS5f","./userSlice.js":"0MutN","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./movieSlice.js":"e6b7t"}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequire0539", {}, null, null, "http://localhost:1234")
+},{"@reduxjs/toolkit":"fKS5f","./userSlice.js":"0MutN","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./movieSlice.js":"e6b7t","./gptSlice.js":"jBy3J","./userPreferances.js":"cmH4X"}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequire0539", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=Netflix-GPT.31b563d9.js.map

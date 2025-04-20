@@ -18,7 +18,7 @@ const SecondaryContainer = () => {
   
   console.log(nowWatching);
 
-   if(nowWatching!=null){
+   
   return (
     <div className='bg-black '>
     <MovieCategory title="Now Playing" movieList={nowWatching}/>
@@ -28,6 +28,6 @@ const SecondaryContainer = () => {
     </div>
   )
 }
-}
+
 
 export default SecondaryContainer;
