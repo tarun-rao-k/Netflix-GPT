@@ -248,8 +248,16 @@ img, video {
   display: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 .left-1\/2 {
@@ -258,6 +266,30 @@ img, video {
 
 .top-1\/2 {
   top: 50%;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.left-1 {
+  left: .25rem;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.-z-10 {
+  z-index: -10;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .m-2 {
@@ -328,8 +360,36 @@ img, video {
   margin-top: 12%;
 }
 
+.mt-\[20\] {
+  margin-top: 20px;
+}
+
+.mt-\[20\%\] {
+  margin-top: 20%;
+}
+
+.mt-\[25\%\] {
+  margin-top: 25%;
+}
+
+.mt-\[30\%\] {
+  margin-top: 30%;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
 .flex {
   display: flex;
+}
+
+.contents {
+  display: contents;
 }
 
 .h-10 {
@@ -350,6 +410,10 @@ img, video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .w-1\/2 {
@@ -380,6 +444,10 @@ img, video {
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -402,6 +470,10 @@ img, video {
   justify-content: space-between;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .overflow-x-scroll {
   overflow-x: scroll;
 }
@@ -412,6 +484,32 @@ img, video {
 
 .rounded-md {
   border-radius: .375rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-red-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));
+}
+
+.border-red-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(185 28 28 / var(--tw-border-opacity, 1));
 }
 
 .bg-black {
@@ -453,6 +551,10 @@ img, video {
   --tw-bg-opacity: .7;
 }
 
+.bg-opacity-50 {
+  --tw-bg-opacity: .5;
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -471,8 +573,16 @@ img, video {
   --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
 
+.object-cover {
+  object-fit: cover;
+}
+
 .p-2 {
   padding: .5rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
 }
 
 .px-2 {
@@ -495,6 +605,11 @@ img, video {
   padding-bottom: .5rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .pb-1 {
   padding-bottom: .25rem;
 }
@@ -513,6 +628,26 @@ img, video {
 
 .pt-52 {
   padding-top: 13rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pt-\[30\] {
+  padding-top: 30px;
+}
+
+.pt-\[30\%\] {
+  padding-top: 30%;
+}
+
+.pt-20 {
+  padding-top: 5rem;
+}
+
+.pt-\[20\%\] {
+  padding-top: 20%;
 }
 
 .text-2xl {

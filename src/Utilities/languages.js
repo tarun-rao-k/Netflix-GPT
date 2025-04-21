@@ -1,7 +1,7 @@
 const languages = {
     en:{
-        searchBtn : "search",
-        searchPlaceholder :"TypeIn and I will recommend you a movie",
+        searchBtn : "Search",
+        searchPlaceholder :"Type and I will recommend you a movie",
     },
     ka:{
         searchBtn : "ಹುಡುಕು",
